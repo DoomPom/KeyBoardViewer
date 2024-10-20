@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:KeyBoardViewer"
         mc:Ignorable="d"
         Title="设置" Height="375" Width="600"
-        Closing="Window_Closing" Loaded="Window_Loaded">
+        Closing="Window_Closing" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" 
+        ContextMenuOpening="Window_ContextMenuOpening" >
     <Window.Resources>
         <!--按键文本框-->
         <Style x:Key="KeyStyle" BasedOn="{StaticResource {x:Type TextBox}}" TargetType="TextBox" >
@@ -17,9 +18,10 @@
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="TextWrapping" Value="WrapWithOverflow" />
-            <EventSetter Event="GotFocus" Handler="TextBox_GotFocus"  />
+            <EventSetter Event="PreviewMouseLeftButtonUp" Handler="TextBox_PreviewMouseLeftButtonUp"  />
             <EventSetter Event="LostFocus" Handler="TextBox_LostFocus" />
             <EventSetter Event="PreviewKeyDown" Handler="TextBox_PreviewKeyDown" />
+            <EventSetter Event="KeyUp" Handler="TextBox_KeyUp" />
         </Style>
         <!-- 按键标题-->
         <Style x:Key="TitleStyle" TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">

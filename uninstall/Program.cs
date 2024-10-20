@@ -14,7 +14,7 @@ namespace uninstall
             if (System.Environment.OSVersion.ToString().IndexOf("NT 5") != -1)
             {
                 //  {29B91F1A-A137-406D-8D21-54C4A2EEB092}
-                Process.Start("msiexec", "/X{29B91F1A-A137-406D-8D21-54C4A2EEB092}");
+                Process.Start("msiexec", "/X {29B91F1A-A137-406D-8D21-54C4A2EEB092}");
             }
         }
     }

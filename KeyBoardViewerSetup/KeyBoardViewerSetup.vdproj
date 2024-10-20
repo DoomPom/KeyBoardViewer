@@ -40,7 +40,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_DE7F20C657F2367B370486AFCE634DC7"
+        "OwnerKey" = "8:_632D20EF790B46248B1290477E64B683"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -52,7 +52,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_632D20EF790B46248B1290477E64B683"
+        "OwnerKey" = "8:_DE7F20C657F2367B370486AFCE634DC7"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -80,6 +80,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
         "Release"
@@ -228,7 +236,7 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:KeyBoardViewerSetup"
+        "ProductName" = "8:KeyBoardViewer"
         "ProductCode" = "8:{29B91F1A-A137-406D-8D21-54C4A2EEB092}"
         "PackageCode" = "8:{B9B25A6E-01E8-48D8-BE9F-6CEB70BCA2E6}"
         "UpgradeCode" = "8:{E722F099-0320-4C9E-B846-E95C5E7FF40B}"
@@ -241,7 +249,7 @@
         "Manufacturer" = "8:wyp"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:KeyBoardViewerSetup"
+        "Title" = "8:KeyBoardViewer"
         "Subject" = "8:"
         "ARPCONTACT" = "8:wyp"
         "Keywords" = "8:"

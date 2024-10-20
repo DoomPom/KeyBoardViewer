@@ -210,8 +210,7 @@ namespace KeyBoardViewer
                 setform.Owner = this;
                 setform.ChangeTopMode += ChangeTopMode;
                 setform.KeySet = KeyMapper;
-                setform.ShowDialog();
-
+                setform.Show();
             }
             else
             {

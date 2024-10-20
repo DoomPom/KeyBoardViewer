@@ -26,7 +26,7 @@ namespace KeyBoardViewer
 
         #region 初始化 加载数据
         /// <summary>
-        /// SettingForm.xaml 的交互逻辑
+        /// SF.xaml 的交互逻辑
         /// </summary>
         public SettingForm()
         {
@@ -194,76 +194,79 @@ namespace KeyBoardViewer
         }
         //TextBox_GotFocus
 
-
-
-        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        public void UpdateCuror(TextBox textBox)
         {
-           TextBox textBox = (TextBox)sender;
-           textBox.Text = "";
+            if (textBox.IsFocused)
+            {
+                textBox.Select(textBox.Text.Length, 0);
+            }
+        }
+        public void TextBox_PreviewMouseLeftButtonUp(Object sender, MouseButtonEventArgs e)
+        {
+            UpdateCuror((TextBox)sender);
+        }
+        public void TextBox_KeyUp(Object sender, KeyEventArgs e)
+        {
+            UpdateCuror((TextBox)sender);
         }
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             // 符合要救的值
             TextBox textBox = (TextBox)sender;
-            int ktag = Convert.ToInt32(textBox.Tag);
-            KItem = KeyList[ktag / 2];
-
-            if (ktag % 2 == 0)
-            {
-                KItem.Key0 = KItem.Key0;
-            }
-            else
-            {
-                KItem.Key1 = KItem.Key1;
-            }
-        }
-        private void TLostFocus(object sender)
-        {
-            
+            textBox.UpdateLayout();
         }
         //TextBox_LostFocus
         private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             e.Handled = true;
             int vkey = KeyInterop.VirtualKeyFromKey(e.Key);
-            if(KeySet.ContainsKey((VKey)vkey))
+
+            // 符合要救的值
+            TextBox textBox = (TextBox)sender;
+            int ktag = Convert.ToInt32(textBox.Tag);
+            int curkey = (int)Config.Keys[ktag];
+
+            if (vkey == curkey)
+                { return; }
+
+            // 存在性判断
+            if (KeySet.ContainsKey((VKey)vkey))
             {
-                
                 MessageBox.Show( "\""+KeyItem.GetKeyName(vkey) + "\" 已设定按键","按键设置",MessageBoxButton.OK, MessageBoxImage.Stop);
                 return;
             }
             
             if(KeyItem.TryGetKeyName(vkey,out String keyName))
             {
-                // 符合要救的值
-                TextBox textBox = (TextBox)sender;
-                int ktag = Convert.ToInt32(textBox.Tag);
                 KItem = KeyList[ktag / 2];
-                
                 if (ktag % 2 == 0)
                 {
-                    KeySet.Remove((VKey)KItem.Key0);
-                    KItem.Key0 = vkey;
+                   KItem.Key0 = vkey;
                 }
                 else
                 {
-                    KeySet.Remove((VKey)KItem.Key1);
                     KItem.Key1 = vkey;
                 }
+                KeySet.Remove((VKey)curkey);
                 KeySet.Add((VKey)vkey, (KeyStatueButton)(ktag / 2));
                 Config.Keys[ktag] = (VKey)vkey;
 
-                Keyboard.ClearFocus();
+                //Keyboard.ClearFocus();
                 //FocusManager.SetFocusedElement(FreeText, FreeText);
                 //FreeText.Focus();
             }
             else
             {
-                MessageBox.Show("ESC,F2~F12,0~9键以及系统键无法设定为操作按钮", "按键设置", MessageBoxButton.OK, MessageBoxImage.Stop);
+                MessageBox.Show("ESC,F1~F12,0~9键以及系统键无法设定为操作按钮", "按键设置", MessageBoxButton.OK, MessageBoxImage.Stop);
                 return;
             }
         }
         #endregion
+
+        private void Window_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 
     public class KeyItem : INotifyPropertyChanged
@@ -290,7 +293,7 @@ namespace KeyBoardViewer
 "X","Y","Z","","","","","",         // "X","Y","Z","Lwin","Rwin","Apps","","Sleep",
 "0(Numpad)","1(Numpad)","2(Numpad)","3(Numpad)","4(Numpad)","5(Numpad)","6(Numpad)","7(Numpad)",
 "8(Numpad)","9(Numpad)","*(Numpad)","+(Numpad)","Separator(Numpad)","-(Numpad)",".(Numpad)","/(Numpad)",
-"F1","","","","","","","",         // "F1","F2","F3","F4","F5","F6","F7","F8",
+"","","","","","","","",         // "F1","F2","F3","F4","F5","F6","F7","F8",
 "","","","","","","","",         // "F9","F10","F11","F12","F13","F14","F15","F16",
 "","","","","","","","",         // "F17","F18","F19","F20","F21","F22","F23","F24",
 "","","","","","","","",         // "Navigation_View","Navigation_Menu","Navigation_Up","Navigation_Down","Navigation_Left","Navigation_Right","Navigation_Accept","Navigation_Cancel",

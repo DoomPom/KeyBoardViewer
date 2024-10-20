@@ -1,0 +1,60 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style x:Key="event" BasedOn="{StaticResource {x:Type TextBox} }" TargetType="TextBox">
+            <EventSetter  Event="GotFocus" Handler="TextBox_GotFocus" />
+            <EventSetter  Event="PreviewMouseDown" Handler="TextBox_PreviewMouseDown" />
+        </Style>
+    </Window.Resources>
+    
+    <Grid>
+        <StackPanel>
+            <Label Content="aaaa" />
+            <TextBox x:Name="tin" Height="30" PreviewMouseLeftButtonUp="Text_PreviewMouseLeftButtonUp" />
+            <TextBox Height="30" TextChanged="TextBox_TextChanged" SelectionChanged="TextBox_SelectionChanged" PreviewMouseDoubleClick="TextBox_PreviewMouseDoubleClick"
+MouseDoubleClick="TextBox_MouseDoubleClick" TargetUpdated="TextBox_TargetUpdated" SourceUpdated="TextBox_SourceUpdated" 
+DataContextChanged="TextBox_DataContextChanged" RequestBringIntoView="TextBox_RequestBringIntoView" SizeChanged="TextBox_SizeChanged"
+Initialized="TextBox_Initialized" Loaded="TextBox_Loaded" Unloaded="TextBox_Unloaded"
+ToolTipOpening="TextBox_ToolTipOpening" ToolTipClosing="TextBox_ToolTipClosing" ContextMenuOpening="TextBox_ContextMenuOpening"
+ContextMenuClosing="TextBox_ContextMenuClosing" PreviewMouseDown="TextBox_PreviewMouseDown" MouseDown="TextBox_MouseDown"
+PreviewMouseUp="TextBox_PreviewMouseUp" MouseUp="TextBox_MouseUp" PreviewMouseLeftButtonDown="TextBox_PreviewMouseLeftButtonDown"
+MouseLeftButtonDown="TextBox_MouseLeftButtonDown" PreviewMouseLeftButtonUp="TextBox_PreviewMouseLeftButtonUp" MouseLeftButtonUp="TextBox_MouseLeftButtonUp"
+PreviewMouseRightButtonDown="TextBox_PreviewMouseRightButtonDown" MouseRightButtonDown="TextBox_MouseRightButtonDown" PreviewMouseRightButtonUp="TextBox_PreviewMouseRightButtonUp"
+MouseRightButtonUp="TextBox_MouseRightButtonUp"  
+PreviewMouseWheel="TextBox_PreviewMouseWheel" MouseWheel="TextBox_MouseWheel" MouseEnter="TextBox_MouseEnter"
+MouseLeave="TextBox_MouseLeave" GotMouseCapture="TextBox_GotMouseCapture" LostMouseCapture="TextBox_LostMouseCapture"
+QueryCursor="TextBox_QueryCursor" PreviewStylusDown="TextBox_PreviewStylusDown" StylusDown="TextBox_StylusDown"
+PreviewStylusUp="TextBox_PreviewStylusUp" StylusUp="TextBox_StylusUp" PreviewStylusMove="TextBox_PreviewStylusMove"
+StylusMove="TextBox_StylusMove" PreviewStylusInAirMove="TextBox_PreviewStylusInAirMove" StylusInAirMove="TextBox_StylusInAirMove"
+StylusEnter="TextBox_StylusEnter" StylusLeave="TextBox_StylusLeave" PreviewStylusInRange="TextBox_PreviewStylusInRange" 
+StylusInRange="TextBox_StylusInRange" PreviewStylusOutOfRange="TextBox_PreviewStylusOutOfRange" StylusOutOfRange="TextBox_StylusOutOfRange"
+PreviewStylusSystemGesture="TextBox_PreviewStylusSystemGesture" StylusSystemGesture="TextBox_StylusSystemGesture" GotStylusCapture="TextBox_GotStylusCapture"
+LostStylusCapture="TextBox_LostStylusCapture" StylusButtonDown="TextBox_StylusButtonDown" StylusButtonUp="TextBox_StylusButtonUp"
+PreviewStylusButtonDown="TextBox_PreviewStylusButtonDown" PreviewStylusButtonUp="TextBox_PreviewStylusButtonUp" PreviewKeyDown="TextBox_PreviewKeyDown"
+KeyDown="TextBox_KeyDown" PreviewKeyUp="TextBox_PreviewKeyUp" KeyUp="TextBox_KeyUp"
+PreviewGotKeyboardFocus="TextBox_PreviewGotKeyboardFocus" GotKeyboardFocus="TextBox_GotKeyboardFocus" PreviewLostKeyboardFocus="TextBox_PreviewLostKeyboardFocus"
+LostKeyboardFocus="TextBox_LostKeyboardFocus" PreviewTextInput="TextBox_PreviewTextInput" TextInput="TextBox_TextInput" 
+PreviewQueryContinueDrag="TextBox_PreviewQueryContinueDrag" QueryContinueDrag="TextBox_QueryContinueDrag" PreviewGiveFeedback="TextBox_PreviewGiveFeedback"
+GiveFeedback="TextBox_GiveFeedback" PreviewDragEnter="TextBox_PreviewDragEnter" DragEnter="TextBox_DragEnter"
+PreviewDragOver="TextBox_PreviewDragOver" DragOver="TextBox_DragOver" PreviewDragLeave="TextBox_PreviewDragLeave"
+DragLeave="TextBox_DragLeave" PreviewDrop="TextBox_PreviewDrop" Drop="TextBox_Drop"
+PreviewTouchDown="TextBox_PreviewTouchDown" TouchDown="TextBox_TouchDown"
+PreviewTouchUp="TextBox_PreviewTouchUp" TouchUp="TextBox_TouchUp"
+GotTouchCapture="TextBox_GotTouchCapture" LostTouchCapture="TextBox_LostTouchCapture" TouchEnter="TextBox_TouchEnter"
+TouchLeave="TextBox_TouchLeave" IsMouseDirectlyOverChanged="TextBox_IsMouseDirectlyOverChanged" IsKeyboardFocusWithinChanged="TextBox_IsKeyboardFocusWithinChanged"
+IsMouseCapturedChanged="TextBox_IsMouseCapturedChanged" IsMouseCaptureWithinChanged="TextBox_IsMouseCaptureWithinChanged" IsStylusDirectlyOverChanged="TextBox_IsStylusDirectlyOverChanged"
+IsStylusCapturedChanged="TextBox_IsStylusCapturedChanged" IsStylusCaptureWithinChanged="TextBox_IsStylusCaptureWithinChanged" IsKeyboardFocusedChanged="TextBox_IsKeyboardFocusedChanged"
+ GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"
+IsEnabledChanged="TextBox_IsEnabledChanged" IsHitTestVisibleChanged="TextBox_IsHitTestVisibleChanged" IsVisibleChanged="TextBox_IsVisibleChanged"
+FocusableChanged="TextBox_FocusableChanged" ManipulationStarting="TextBox_ManipulationStarting" ManipulationStarted="TextBox_ManipulationStarted"
+ManipulationDelta="TextBox_ManipulationDelta" ManipulationInertiaStarting="TextBox_ManipulationInertiaStarting" ManipulationBoundaryFeedback="TextBox_ManipulationBoundaryFeedback"
+                     />
+        </StackPanel>
+    </Grid>
+</Window>
