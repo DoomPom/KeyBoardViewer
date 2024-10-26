@@ -11,11 +11,16 @@ using static System.Resources.ResXFileRef;
 
 namespace KeyBoardViewer
 {
+    public enum Option_e:int
+    {
+        Topmost = 0x01,
+        HideButton=0x02
+    }
     internal static class Config
     {
         public const string path = "SOFTWARE\\KeyBoardViewer";
         public const string KeysItem = "Keys";
-        public const string TopmostItem = "Topmost";
+        public const string OptionItem = "Option";
         public static VKey[] DefaultKeys = new VKey[16] {
                 VKey.UP,VKey.NUMPAD8,
                 VKey.RIGHT,VKey.NUMPAD6,
@@ -27,7 +32,7 @@ namespace KeyBoardViewer
                 VKey.X,VKey.SPACE
         };
         public static VKey[] Keys = new VKey[16];
-        public static bool Topmost=true;
+        public static int Option = 1;
         static Config()
         {
             // 注册表
@@ -42,7 +47,7 @@ namespace KeyBoardViewer
             {
                 Array.Copy(DefaultKeys, Keys, Keys.Length);
                 key.SetValue(KeysItem, Keys, RegistryValueKind.Binary);
-                key.SetValue(TopmostItem, Convert.ToInt32(Topmost), RegistryValueKind.DWord);
+                key.SetValue(OptionItem, Option, RegistryValueKind.DWord);
             }
             else
             { // 不存在值。 .
@@ -52,7 +57,7 @@ namespace KeyBoardViewer
                     Keys[i] = (VKey)keys[i];
                 }
                 // 读取
-                Topmost = Convert.ToBoolean(key.GetValue(TopmostItem, RegistryValueKind.DWord));
+                Option = (int)key.GetValue(OptionItem, RegistryValueKind.DWord);
             }
             registry.Close();
         }
@@ -71,9 +76,19 @@ namespace KeyBoardViewer
                 key = registry.CreateSubKey(path);
             }
             key.SetValue(KeysItem, Keys, RegistryValueKind.Binary);
-            key.SetValue(TopmostItem, Convert.ToInt32(Topmost), RegistryValueKind.DWord);
+            key.SetValue(OptionItem, Option, RegistryValueKind.DWord);
             registry.Close();
         }
 
+        public static bool TopMost
+        {
+            get => (Option & (int)Option_e.Topmost) != 0;
+            set { Option = Option & (~(int)Option_e.Topmost) | (value ? (int)Option_e.Topmost : 0); }
+        }
+        public static bool HideButton
+        {
+            get => (Option & (int) Option_e.HideButton) != 0;
+            set { Option = Option & (~(int)Option_e.HideButton) | (value ? (int) Option_e.HideButton : 0);}
+        }
     }
 }

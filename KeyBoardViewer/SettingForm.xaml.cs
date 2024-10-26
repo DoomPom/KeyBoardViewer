@@ -19,6 +19,7 @@ namespace KeyBoardViewer
     {
         // 定义按钮名称
         public Action<bool> ChangeTopMode;
+        public Action<bool> ChangeHideButton;
 
         public Dictionary<VKey, KeyStatueButton> KeySet;
         public KeyItem[] KeyList;
@@ -90,7 +91,8 @@ namespace KeyBoardViewer
         #region 窗体事件 加载卸载。
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.TopMost.IsChecked = Config.Topmost;
+            this.TopMost.IsChecked = Config.TopMost;
+            this.HideButton.IsChecked = Config.HideButton;
             UpdateLastSize();
             AspectRatio = (float)(this.Width / this.Height);
         }
@@ -175,10 +177,22 @@ namespace KeyBoardViewer
         // 置顶选项
         private void TopMost_Click(object sender, RoutedEventArgs e)
         {
-            Config.Topmost = Convert.ToBoolean(this.TopMost.IsChecked);
-            //ChangeTopMode?.Invoke(Config.Topmost);
-            this.ChangeTopMode.Invoke(Config.Topmost);
+            Config.TopMost = Convert.ToBoolean(this.TopMost.IsChecked);
+            this.ChangeTopMode.Invoke(Config.TopMost);
         }
+        /// <summary>
+        /// 隐藏按键
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HideButton_Click(object sender, RoutedEventArgs e)
+        {
+            bool value = Convert.ToBoolean(this.HideButton.IsChecked);
+            Config.HideButton = value;
+            // 更新显示//
+            ChangeHideButton(value);
+        }
+
         //  恢复默认值
         private void RebackDefault_Click(object sender, RoutedEventArgs e)
         {
@@ -267,6 +281,8 @@ namespace KeyBoardViewer
         {
             e.Handled = true;
         }
+
+
     }
 
     public class KeyItem : INotifyPropertyChanged

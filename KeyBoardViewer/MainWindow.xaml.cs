@@ -48,7 +48,11 @@ namespace KeyBoardViewer
             AspectRatio = (float)(this.Width / this.Height); // 2.0f;
 
             // 加载窗体
-            this.Topmost =  Config.Topmost;
+            this.Topmost =  Config.TopMost;
+            if(Config.HideButton)
+            {
+                ChangeHideButton(true);
+            }
 
             KeyStatueButtons = new ToggleButton[8]{Key_Up,Key_Right, Key_Left, Key_Down,Key_Shift,Key_Ctrl,Key_Alt,Key_X};
             for (int i = 0;i<16;i++)
@@ -209,6 +213,7 @@ namespace KeyBoardViewer
                 setform = new SettingForm();
                 setform.Owner = this;
                 setform.ChangeTopMode += ChangeTopMode;
+                setform.ChangeHideButton += ChangeHideButton;
                 setform.KeySet = KeyMapper;
                 setform.Show();
             }
@@ -222,13 +227,32 @@ namespace KeyBoardViewer
         {
             this.Topmost = topmode;
         }
+        // 修改窗体模式
+        private void ChangeHideButton(bool value)
+        {
+            // 隐藏
+            if (value)
+            {
+                Key_X.Visibility=Visibility.Collapsed;
+                Key_Alt.Visibility=Visibility.Collapsed;
+                MainLayout.MinWidth -= 80;
+            }
+            else
+            {
+                Key_X.Visibility = Visibility.Visible;
+                Key_Alt.Visibility = Visibility.Visible;
+                MainLayout.MinWidth += 80;
+            }
+            AspectRatio = (float)(MainLayout.MinWidth / MainLayout.MinHeight); // 2.0f;
+            this.Width = this.Height * AspectRatio;
+        }
         #endregion
         #region 窗体事件: 拖拉改变窗体大小保持宽高比
         //最后的宽度（Last Width）
-        private uint LastWidth;
+        private double LastWidth;
 
         //最后的高度（Last Height）
-        private uint LastHeight;
+        private double LastHeight;
 
         //这个属性是指 窗口的宽度和高度的比例（宽度/高度）(4:3)
         //This property refers to the aspect ratio (width / height) of the window (4: 3)
@@ -248,8 +272,8 @@ namespace KeyBoardViewer
         }
         public void UpdateLastSize()
         {
-            LastWidth = (uint)this.Width;
-            LastHeight = (uint)this.Height;
+            LastWidth = this.Width;
+            LastHeight = this.Height;
         }
 
         public const Int32 WM_EXITSIZEMOVE = 0x0232;
