@@ -1,149 +1,105 @@
-﻿using RawInput;
+﻿
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 
-namespace KeyBoardViewer
+namespace KartRiderKeyViewer
 {
+
     /// <summary>
     /// Interaction logic for MainWindowApp.xaml
     /// </summary>
     public partial class MainWindowApp : Window
     {
 
-        private Dictionary<VKey, KeyStatueButton> KeyMapper = new Dictionary<VKey, KeyStatueButton>();
-        private ToggleButton[] KeyStatueButtons ;
+        private bool[] keyStatuss;
+        private VKey[] Keys;
+        private Timer timer ;
+        public MainViewModel model;
 
+        [DllImport("User32.dll", SetLastError = true)]
+        internal static extern short GetAsyncKeyState(int vkey);
+        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            for (int i = 0; i < keyStatuss.Length; i++)
+            {
+                keyStatuss[i] = Convert.ToBoolean(GetAsyncKeyState((int)Keys[i]));
+            }
+            int j = 0;
+            for (int i = 0; i < keyStatuss.Length/2; i++)
+            {
+                j = 2 * i;
+                keyStatuss[i] = keyStatuss[j] | keyStatuss[j+1];
+            }
+            #region 此处展示的是把副线程的内容转到主线程
+            Application.Current.Dispatcher.BeginInvoke(
+                     new Action(() =>
+                     {
+                         //  Key_Up,Key_Right, Key_Left, Key_Down,Key_Shift,Key_Ctrl,Key_Alt,Key_X};
+                         model.KeyUp = keyStatuss[0];
+                         model.KeyRight = keyStatuss[1];
+                         model.KeyLeft = keyStatuss[2];
+                         model.KeyDown = keyStatuss[3];
+                         model.KeyShift = keyStatuss[4];
+                         model.KeyCtrl = keyStatuss[5];
+                         model.KeyAlt = keyStatuss[6];
+                         model.KeyX = keyStatuss[7];
+                     }));
+            #endregion
 
-        #region 加载键盘hook
-        private RawInputManager hook;
+        }
 
         public MainWindowApp()
         {
             InitializeComponent();
+            model = new MainViewModel();
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //hook.Start();
-            IntPtr handle = new WindowInteropHelper(this).Handle;
-            //VKey[] hotkey = { VKey.LWIN, VKey.LMENU, VKey.C };
-            hook = new RawInputManager(handle, false);
-            //hook.HotKeys = hotkey;
-            hook.AddMessageFilter();
-            hook.OnKeyPressed += Hook_OnKeyPressed;
+
+            model.HideButtonChanged += Model_HideButtonChanged;
+            model.IsTopMost = Config.TopMost;
+            model.HideButton = Config.HideButton;
+            this.DataContext = model;
+
+            // 加载窗体
+            //this.Topmost =  Config.TopMost;
+            //if(Config.HideButton)
+            //{
+            //    ChangeHideButton(true);
+            //}
+
+            Keys = Config.Keys;
+            keyStatuss = new bool[Keys.Length];
+            // 定时器
+            timer = new Timer();
+            timer.Elapsed += Timer_Elapsed;
+            timer.AutoReset = true;
+            timer.Interval = 10;
+            timer.Enabled = true;
 
             UpdateLastSize();
             AspectRatio = (float)(this.Width / this.Height); // 2.0f;
-
-            // 加载窗体
-            this.Topmost =  Config.TopMost;
-            if(Config.HideButton)
-            {
-                ChangeHideButton(true);
-            }
-
-            KeyStatueButtons = new ToggleButton[8]{Key_Up,Key_Right, Key_Left, Key_Down,Key_Shift,Key_Ctrl,Key_Alt,Key_X};
-            for (int i = 0;i<16;i++)
-            {
-                KeyMapper.Add(Config.Keys[i], (KeyStatueButton)(i/2));
-            }
-
         }
+
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            hook.OnKeyPressed -= Hook_OnKeyPressed;
+            timer.Stop();
+            timer.Dispose();
+            timer = null;
             if (setform != null)
             {
                 setform = null;
             }
             e.Cancel = false;
         }
-        #endregion
-        #region 按键拦截
-
-        void Hook_OnKeyPressed(object sender, RawKeyEventArg e)
-        {
-            VKey vkCode = (VKey)e.KeyPressEvent.VKey;
-            VKey key1;
-            VKey key2;
-            bool pressed = !e.KeyPressEvent.KeyPressState;
-            if (KeyMapper.TryGetValue(vkCode, out KeyStatueButton button))
-            {
-                if(pressed)
-                {
-                    KeyStatueButtons[(int)button].IsChecked = pressed;
-                }
-                else
-                {
-                    key1 = Config.Keys[2*(int)button];
-                    key2 = Config.Keys[2 *(int)button + 1];
-                    if(key1 == vkCode)
-                    {
-                        if(!e.KeyPressEvent.isPressed((int)key2))
-                        {
-                            KeyStatueButtons[(int)button].IsChecked = pressed;
-                        }
-                    }
-                    if (key2 == vkCode)
-                    {
-                        if (!e.KeyPressEvent.isPressed((int)key1))
-                        {
-                            KeyStatueButtons[(int)button].IsChecked = pressed;
-                        }
-                    }
-                }
-            }
-        }
-        private void Hook_Key(int vkCode,bool pressed)
-        {
-            // 转换为C#定义的按键码
-            //Key key = KeyInterop.KeyFromVirtualKey((int)vkCode);
-            //bool used = true;
-            //VKey key = (VKey)vkCode;
-            //switch (key)
-            //{
-            //    case VKey.LEFT:
-            //    case VKey.NUMPAD4:
-            //        Key_Left.IsChecked = pressed;
-            //        break;
-            //    case VKey.RIGHT:
-            //    case VKey.NUMPAD6:
-            //        Key_Right.IsChecked = pressed;
-            //        break;
-            //    case VKey.Up:
-            //    case VKey.NUMPAD8:
-            //        Key_Up.IsChecked = pressed;
-            //        break;
-            //    case VKey.DOWN:
-            //    case VKey.NUMPAD2:
-            //        Key_Down.IsChecked = pressed;
-            //        break;
-            //    case VKey.LSHIFT:
-            //    case VKey.RSHIFT:
-            //        Key_Shift.IsChecked = pressed;
-            //        break;
-            //    case VKey.LCONTROL:
-            //    case VKey.RCONTROL:
-            //        Key_Ctrl.IsChecked = pressed;
-            //        break;
-            //    case VKey.LMENU:
-            //    case VKey.RMENU:
-            //        Key_Alt.IsChecked = pressed;
-            //        break;
-            //    case VKey.X:
-            //    case VKey.SPACE:
-            //        Key_X.IsChecked = pressed;
-            //        break;
-            //    default:
-            //        break;
-            //}
-            //Console.WriteLine("KeyUp:{0}", key);
-        }
-        #endregion
         #region 窗体事件: 关闭 拖动 进入 离开
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
@@ -174,7 +130,7 @@ namespace KeyBoardViewer
         }
         #endregion
         #region 按钮点击事件拦截
-        private void ToggleButton_Click(object sender, RoutedEventArgs e)
+        private void ToggleButton_Click(object sender, MouseButtonEventArgs e)
         {
             e.Handled = true;
         }
@@ -189,9 +145,7 @@ namespace KeyBoardViewer
             {
                 setform = new SettingForm();
                 setform.Owner = this;
-                setform.ChangeTopMode += ChangeTopMode;
-                setform.ChangeHideButton += ChangeHideButton;
-                setform.KeySet = KeyMapper;
+                setform.model = model;
                 setform.Show();
             }
             else
@@ -200,24 +154,15 @@ namespace KeyBoardViewer
             }
         }
         // 修改窗体模式
-        private void ChangeTopMode(bool topmode)
-        {
-            this.Topmost = topmode;
-        }
-        // 修改窗体模式
-        private void ChangeHideButton(bool value)
+        private void Model_HideButtonChanged(bool value)
         {
             // 隐藏
             if (value)
             {
-                Key_X.Visibility=Visibility.Collapsed;
-                Key_Alt.Visibility=Visibility.Collapsed;
                 MainLayout.MinWidth -= 80;
             }
             else
             {
-                Key_X.Visibility = Visibility.Visible;
-                Key_Alt.Visibility = Visibility.Visible;
                 MainLayout.MinWidth += 80;
             }
             AspectRatio = (float)(MainLayout.MinWidth / MainLayout.MinHeight); // 2.0f;
@@ -285,6 +230,7 @@ namespace KeyBoardViewer
         }
 
         #endregion
+
     }
-    public enum KeyStatueButton { Up, Right, Left, Down, Shift, Ctrl, Alt, X }
+
 }

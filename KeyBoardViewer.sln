@@ -20,6 +20,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{7A58523A-0B7D-4293-BFC0-21E5E530B595}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KartRiderKeyViewer", "KartRiderKeyViewer\KartRiderKeyViewer.csproj", "{7CFD6019-A606-42DF-B3F0-458838DECAE7}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "KartRiderKeViewerSetup", "KartRiderKeyViewerSetup\KartRiderKeyViewerSetup.vdproj", "{3B548DB1-13C5-414A-AE26-448E2BF56A41}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +52,14 @@ Global
 		{7A58523A-0B7D-4293-BFC0-21E5E530B595}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A58523A-0B7D-4293-BFC0-21E5E530B595}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A58523A-0B7D-4293-BFC0-21E5E530B595}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CFD6019-A606-42DF-B3F0-458838DECAE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CFD6019-A606-42DF-B3F0-458838DECAE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CFD6019-A606-42DF-B3F0-458838DECAE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CFD6019-A606-42DF-B3F0-458838DECAE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B548DB1-13C5-414A-AE26-448E2BF56A41}.Debug|Any CPU.ActiveCfg = Debug
+		{3B548DB1-13C5-414A-AE26-448E2BF56A41}.Debug|Any CPU.Build.0 = Debug
+		{3B548DB1-13C5-414A-AE26-448E2BF56A41}.Release|Any CPU.ActiveCfg = Release
+		{3B548DB1-13C5-414A-AE26-448E2BF56A41}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
