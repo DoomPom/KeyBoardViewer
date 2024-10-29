@@ -116,7 +116,7 @@
                 {
                     "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
                     {
-                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 和 x64)"
                     "ProductCode" = "8:.NETFramework,Version=v4.7.2"
                     }
                 }
@@ -238,7 +238,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:KartRiderKeViewer"
         "ProductCode" = "8:{29B91F1A-A137-406D-8D21-54C4A2EEB092}"
-        "PackageCode" = "8:{472FB553-0C80-4723-BFF6-020A30F16A0D}"
+        "PackageCode" = "8:{740EBABD-6303-4FFD-9735-C00259E024FB}"
         "UpgradeCode" = "8:{E722F099-0320-4C9E-B846-E95C5E7FF40B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
