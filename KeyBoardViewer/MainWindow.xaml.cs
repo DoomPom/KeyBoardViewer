@@ -52,6 +52,19 @@ namespace KeyBoardViewer
                 KeyMapper.Add(Config.Keys[i], (KeyStatueButton)(i/2));
             }
 
+            if ((int)Config.Loc.Width == 0)
+            {
+                Config.Loc.Width = this.Width;
+                Config.Loc.X = this.Left;
+                Config.Loc.Y = this.Top;
+            }
+            else
+            {
+                this.Width = Config.Loc.Width;
+                this.Height = this.Width / AspectRatio;
+                this.Left = Config.Loc.X;
+                this.Top = Config.Loc.Y;
+            }
         }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -60,6 +73,12 @@ namespace KeyBoardViewer
             {
                 setform = null;
             }
+            // 保存位置:
+
+            Config.Loc.Width = this.Width;
+            Config.Loc.X = this.Left;
+            Config.Loc.Y = this.Top;
+            Config.SaveLocation();
             e.Cancel = false;
         }
         #endregion

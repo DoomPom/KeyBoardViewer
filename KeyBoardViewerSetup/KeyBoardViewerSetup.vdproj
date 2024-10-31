@@ -350,12 +350,12 @@
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
+            "IconIndex" = "3:32512"
             "Transitive" = "11:FALSE"
             "Target" = "8:_632D20EF790B46248B1290477E64B683"
             "Folder" = "8:_5A6CFF5C15744C02811B0807413B893E"
             "WorkingFolder" = "8:_AD2414A4A48E476CACEB25281B34A7E0"
-            "Icon" = "8:"
+            "Icon" = "8:_632D20EF790B46248B1290477E64B683"
             "Feature" = "8:"
             }
         }

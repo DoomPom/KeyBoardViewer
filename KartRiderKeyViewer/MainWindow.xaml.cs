@@ -1,15 +1,12 @@
 ﻿
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Timers;
 using System.Windows;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
-
+using Timer = System.Timers.Timer;
 namespace KartRiderKeyViewer
 {
 
@@ -87,6 +84,19 @@ namespace KartRiderKeyViewer
 
             UpdateLastSize();
             AspectRatio = (float)(this.Width / this.Height); // 2.0f;
+            if ((int)Config.Loc.Width == 0)
+            {
+                Config.Loc.Width = this.Width;
+                Config.Loc.X = this.Left;
+                Config.Loc.Y = this.Top;
+            }
+            else
+            {
+                this.Width = Config.Loc.Width;
+                this.Height = this.Width/ AspectRatio;
+                this.Left = Config.Loc.X;
+                this.Top = Config.Loc.Y;
+            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -98,7 +108,13 @@ namespace KartRiderKeyViewer
             {
                 setform = null;
             }
-            e.Cancel = false;
+            // 保存位置:
+
+            Config.Loc.Width = this.Width;
+            Config.Loc.X = this.Left;
+            Config.Loc.Y = this.Top;
+            Config.SaveLocation();
+            e.Cancel = false;// 关闭
         }
         #region 窗体事件: 关闭 拖动 进入 离开
         private void CloseButton_Click(object sender, RoutedEventArgs e)
@@ -115,8 +131,8 @@ namespace KartRiderKeyViewer
         private void Window_MouseEnter(object sender, MouseEventArgs e)
         {
             this.Background = Brushes.FloralWhite;
-            TitleBar.Visibility = Visibility.Visible;
-            Setting.Visibility = Visibility.Visible;
+            this.TitleBar.Visibility = Visibility.Visible;
+            this.Setting.Visibility = Visibility.Visible;
             this.UpdateLayout();
             //this.WindowStyle = WindowStyle.ToolWindow;
         }
@@ -124,8 +140,8 @@ namespace KartRiderKeyViewer
         private void Window_MouseLeave(object sender, MouseEventArgs e)
         {
             this.Background = new SolidColorBrush(Colors.Transparent);
-            TitleBar.Visibility = Visibility.Hidden;
-            Setting.Visibility = Visibility.Hidden;
+            this.TitleBar.Visibility = Visibility.Hidden;
+            this.Setting.Visibility = Visibility.Hidden;
             this.UpdateLayout();
         }
         #endregion
@@ -159,11 +175,11 @@ namespace KartRiderKeyViewer
             // 隐藏
             if (value)
             {
-                MainLayout.MinWidth -= 80;
+                this.MainLayout.MinWidth -= 80;
             }
             else
             {
-                MainLayout.MinWidth += 80;
+                this.MainLayout.MinWidth += 80;
             }
             AspectRatio = (float)(MainLayout.MinWidth / MainLayout.MinHeight); // 2.0f;
             this.Width = this.Height * AspectRatio;

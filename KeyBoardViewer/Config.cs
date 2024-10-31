@@ -3,6 +3,7 @@ using RawInput;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,6 +16,39 @@ namespace KeyBoardViewer
     {
         Topmost = 0x01,
         HideButton=0x02
+    }
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Location
+    {
+        public double X;
+        public double Y;
+        public double Width;
+    }
+
+    public class StructUtil
+    {
+        public static T BytesToStruct<T>(byte[] bytes, int offset, int length)
+        {
+            IntPtr ptr = Marshal.AllocHGlobal(length);
+            Marshal.Copy(bytes, offset, ptr, length);
+            T obj = Marshal.PtrToStructure<T>(ptr);
+            Marshal.FreeHGlobal(ptr);
+            return obj;
+        }
+        public static T BytesToStruct<T>(byte[] bytes)
+        {
+            return BytesToStruct<T>(bytes, 0, bytes.Length);
+        }
+        public static byte[] ToByteArray(object obj)
+        {
+            int rawsize = Marshal.SizeOf(obj);
+            IntPtr intPtr = Marshal.AllocHGlobal(rawsize);
+            Marshal.StructureToPtr(obj, intPtr, false);
+            byte[] bytes = new byte[rawsize];
+            Marshal.Copy(intPtr, bytes, 0, rawsize);
+            Marshal.FreeHGlobal(intPtr);
+            return bytes;
+        }
     }
     internal static class Config
     {
@@ -33,6 +67,7 @@ namespace KeyBoardViewer
         };
         public static VKey[] Keys = new VKey[16];
         public static int Option = 1;
+        public static Location Loc;
         static Config()
         {
             // 注册表
@@ -57,7 +92,14 @@ namespace KeyBoardViewer
                     Keys[i] = (VKey)keys[i];
                 }
                 // 读取
-                Option = (int)key.GetValue(OptionItem, RegistryValueKind.DWord);
+                Option = (int)key.GetValue(OptionItem, 0);
+                // 读取位置:
+                value = key.GetValue("Location");
+                if (value != null)
+                {
+                    byte[] bytes = (byte[])value;
+                    Loc = StructUtil.BytesToStruct<Location>(bytes);
+                }
             }
             registry.Close();
         }
@@ -79,7 +121,18 @@ namespace KeyBoardViewer
             key.SetValue(OptionItem, Option, RegistryValueKind.DWord);
             registry.Close();
         }
+        public static void SaveLocation()
+        {
+            RegistryKey registry = Registry.CurrentUser;
+            RegistryKey key = registry.OpenSubKey(path, true);
+            if (key == null)
+            {
+                key = registry.CreateSubKey(path);
+            }
+            key.SetValue("Location", StructUtil.ToByteArray(Loc), RegistryValueKind.Binary);
 
+            registry.Close();
+        }
         public static bool TopMost
         {
             get => (Option & (int)Option_e.Topmost) != 0;
