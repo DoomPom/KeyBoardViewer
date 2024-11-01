@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_7FA5C36618E44CB4A36888DBD986430B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_8C3B9947D7C64B35BD6A7B5846C73E5A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -27,8 +33,20 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_DE7F20C657F2367B370486AFCE634DC7"
+        "OwnerKey" = "8:_7FA5C36618E44CB4A36888DBD986430B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_8C3B9947D7C64B35BD6A7B5846C73E5A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_7FA5C36618E44CB4A36888DBD986430B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -326,7 +344,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_FD635AEE1D61426182E4CC3600D4B510"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C21FBC12101C45C89CCAEF2DAD0EFB26"
             {
             "Name" = "8:KartRiderKeyViewer"
             "Arguments" = "8:"
@@ -334,10 +352,10 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:32512"
             "Transitive" = "11:FALSE"
-            "Target" = "8:"
+            "Target" = "8:_7FA5C36618E44CB4A36888DBD986430B"
             "Folder" = "8:_5A6CFF5C15744C02811B0807413B893E"
             "WorkingFolder" = "8:_AD2414A4A48E476CACEB25281B34A7E0"
-            "Icon" = "8:"
+            "Icon" = "8:_7FA5C36618E44CB4A36888DBD986430B"
             "Feature" = "8:"
             }
         }
@@ -599,6 +617,34 @@
         }
         "ProjectOutput"
         {
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_7FA5C36618E44CB4A36888DBD986430B"
+            {
+            "SourcePath" = "8:..\\KartRiderKeyViewer\\obj\\Release\\KartRiderKeyViewer.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_AD2414A4A48E476CACEB25281B34A7E0"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{BF630C19-45FA-448C-BCC9-A879E2F3C13B}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_8C3B9947D7C64B35BD6A7B5846C73E5A"
             {
             "SourcePath" = "8:..\\uninstall\\obj\\Release\\uninstall.exe"

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -86,7 +87,15 @@ namespace ConsoleApp1
         }
         static void Main(string[] args)
         {
-            EventHandle();
+            string f = @"C:\Windows\System32\wow64.dll";
+            if (File.Exists(f))
+            {
+                Console.WriteLine("存在");
+            }
+            else
+            {
+                Console.WriteLine("文件不存在");
+            }
         }
         static void Main2(string[] args)
         {

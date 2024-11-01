@@ -153,11 +153,11 @@
                         HorizontalAlignment="Right" Click="CloseButton_Click" Background="Red" />
             </DockPanel>
             <StackPanel Orientation="Horizontal" Grid.Row="1">
-                <ToggleButton x:Name="Key_Shift" IsChecked="{Binding KeyShift,Mode=OneWay}" Content="Shift" Style="{StaticResource KeyStatueButton}" Width="116" />
+                <ToggleButton x:Name="Key_Shift" IsChecked="{Binding KeyShift,Mode=OneWay}" Content="Shift" Style="{StaticResource KeyStatueButton}" Width="106" />
                 <ToggleButton x:Name="Key_X" IsChecked="{Binding KeyX,Mode=OneWay}" Content="X" Style="{StaticResource KeyStatueButton}"
                               Visibility="{Binding HideButton,Converter={StaticResource HideByttonToStatueConverter}}" >
                 </ToggleButton>
-                <ToggleButton x:Name="Key_Up" IsChecked="{Binding KeyUp,Mode=OneWay}" Content="▲" Style="{StaticResource KeyStatueButton}"  Margin="42,2,2,2"/>
+                <ToggleButton x:Name="Key_Up" IsChecked="{Binding KeyUp,Mode=OneWay}" Content="▲" Style="{StaticResource KeyStatueButton}"  Margin="52,2,2,2"/>
                 <Button x:Name="Setting" Content="⚙" Style="{StaticResource SettingButton}" 
                           Visibility="Visible"  Click="Setting_Click" >
                 </Button>
