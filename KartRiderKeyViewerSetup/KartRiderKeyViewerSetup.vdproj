@@ -28,13 +28,13 @@
         "Entry"
         {
         "MsmKey" = "8:_DE7F20C657F2367B370486AFCE634DC7"
-        "OwnerKey" = "8:_8C3B9947D7C64B35BD6A7B5846C73E5A"
+        "OwnerKey" = "8:_7FA5C36618E44CB4A36888DBD986430B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_DE7F20C657F2367B370486AFCE634DC7"
-        "OwnerKey" = "8:_7FA5C36618E44CB4A36888DBD986430B"
+        "OwnerKey" = "8:_8C3B9947D7C64B35BD6A7B5846C73E5A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -238,7 +238,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:KartRiderKeViewer"
         "ProductCode" = "8:{29B91F1A-A137-406D-8D21-54C4A2EEB092}"
-        "PackageCode" = "8:{48F0CDF6-B25E-4538-AF97-0F7E7EDBD434}"
+        "PackageCode" = "8:{5DDF16CC-56C3-4C95-8A57-E5E7D8603A4B}"
         "UpgradeCode" = "8:{E722F099-0320-4C9E-B846-E95C5E7FF40B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -344,7 +344,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C21FBC12101C45C89CCAEF2DAD0EFB26"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_A36656D6CAF2451C8EAEB8AC6B71C017"
             {
             "Name" = "8:KartRiderKeyViewer"
             "Arguments" = "8:"
