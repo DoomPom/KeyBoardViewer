@@ -27,13 +27,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_DE7F20C657F2367B370486AFCE634DC7"
+        "MsmKey" = "8:_9EBF6160223124868D9EBFDCC997EBC5"
         "OwnerKey" = "8:_7FA5C36618E44CB4A36888DBD986430B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_DE7F20C657F2367B370486AFCE634DC7"
+        "MsmKey" = "8:_9EBF6160223124868D9EBFDCC997EBC5"
         "OwnerKey" = "8:_8C3B9947D7C64B35BD6A7B5846C73E5A"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -52,7 +52,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_DE7F20C657F2367B370486AFCE634DC7"
+        "OwnerKey" = "8:_9EBF6160223124868D9EBFDCC997EBC5"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -150,14 +150,14 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DE7F20C657F2367B370486AFCE634DC7"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9EBF6160223124868D9EBFDCC997EBC5"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
-                    "_DE7F20C657F2367B370486AFCE634DC7"
+                    "_9EBF6160223124868D9EBFDCC997EBC5"
                     {
                     "Name" = "8:System.Net.Http.dll"
                     "Attributes" = "3:512"
@@ -351,7 +351,7 @@
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:32512"
-            "Transitive" = "11:FALSE"
+            "Transitive" = "11:TRUE"
             "Target" = "8:_7FA5C36618E44CB4A36888DBD986430B"
             "Folder" = "8:_5A6CFF5C15744C02811B0807413B893E"
             "WorkingFolder" = "8:_AD2414A4A48E476CACEB25281B34A7E0"

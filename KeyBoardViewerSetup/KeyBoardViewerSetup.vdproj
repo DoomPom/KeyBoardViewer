@@ -238,7 +238,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:KeyBoardViewer"
         "ProductCode" = "8:{29B91F1A-A137-406D-8D21-54C4A2EEB092}"
-        "PackageCode" = "8:{25662D15-F3DA-4ABF-BB2A-4D6BD24E0613}"
+        "PackageCode" = "8:{9900F729-D10A-4072-A8E1-EB0853066533}"
         "UpgradeCode" = "8:{E722F099-0320-4C9E-B846-E95C5E7FF40B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
